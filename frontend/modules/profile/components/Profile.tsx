@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Profile = (): React.ReactNode => {
+const Profile = () => {
   return <div>Profile</div>;
 };
 

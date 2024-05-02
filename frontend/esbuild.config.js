@@ -5,15 +5,8 @@ const buildParams = {
   assetNames: 'assets/[name]-[hash]',
   outdir: 'build',
 
-  entryPoints: [
-    './frontend/modules/**/*.ts',
-    './frontend/modules/**/*.tsx',
-    './frontend/main.ts',
-  ],
+  entryPoints: ['./frontend/modules/**/*.tsx'],
   bundle: true,
-  minify: true,
-  format: 'cjs',
-  sourcemap: true,
   loader: {
     '.js': 'jsx',
     '.ts': 'tsx',

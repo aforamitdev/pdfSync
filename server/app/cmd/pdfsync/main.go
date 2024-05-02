@@ -48,8 +48,8 @@ func run(ctx context.Context, log *logger.Logger) error {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/dashboard", templ.Handler(ui.Dashboard()))
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+	mux.Handle("/dashboard", templ.Handler(ui.Dashboard()))
 	serverErrors := make(chan error, 1)
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
