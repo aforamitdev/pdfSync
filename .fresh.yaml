@@ -1,6 +1,6 @@
 version: "1"
 root: "./server"
-main_path: "./server/app/cmd/pdfsync/main.go"
+main_path: "./server/app/cmd/pdfsync/"
 tmp_path: ./tmp
 build_name: runner-build
 build_args: ""

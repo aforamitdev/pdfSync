@@ -7,4 +7,4 @@ tmplformate:
 
 
 run:
-	go run ./server/app/cmd/pdfsync/main.go
+	go run ./server/app/cmd/pdfsync/*.go
