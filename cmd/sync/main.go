@@ -10,8 +10,6 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
-
-	logger "github.com/aforamitdev/pdfsync/server/foundation"
 )
 
 // go:embed build
