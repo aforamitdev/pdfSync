@@ -1,7 +1,6 @@
 import { ResizablePanel } from '../ui/resizable';
 import { cn } from '@/lib/utils';
 import { AccountSwitcher } from '../home/components/account-switcher';
-import { Separator } from '@radix-ui/react-separator';
 import { Nav } from '../home/components/nav';
 import {
   AlertCircle,
@@ -16,6 +15,7 @@ import {
   Users2,
 } from 'lucide-react';
 import { useAppContext } from '@/Providers/AppProvider';
+import { Separator } from '../ui/separator';
 
 const Navigator = () => {
   const { isCollapsed, setIsCollapsed } = useAppContext();
