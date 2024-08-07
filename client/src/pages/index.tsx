@@ -1,12 +1,10 @@
-import Home from "@/components/home/Home";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import DashboardContainer from '@/components/home/DashboardContainer';
+import { BrowserRouter } from 'react-router-dom';
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-      </Routes>
+      <DashboardContainer />
     </BrowserRouter>
   );
 };
