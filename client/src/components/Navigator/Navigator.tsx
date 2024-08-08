@@ -16,9 +16,11 @@ import {
 } from 'lucide-react';
 import { useAppContext } from '@/Providers/AppProvider';
 import { Separator } from '../ui/separator';
+import { useNavigate } from "react-router-dom";
 
 const Navigator = () => {
   const { isCollapsed, setIsCollapsed } = useAppContext();
+  const navigate = useNavigate();
 
   const accounts = [
     {
@@ -81,6 +83,7 @@ const Navigator = () => {
         isCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out'
       )}
     >
+      {/* <div onClick={()=>navigate({pathname:"/asas"})}>click</div> */}
       <div
         className={cn(
           'flex h-[56px] items-center justify-center',

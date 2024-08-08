@@ -3,6 +3,7 @@ import { Mail } from './components/mail';
 import { Routes, Route } from 'react-router-dom';
 import Navigator from '../Navigator/Navigator';
 import { ResizablePanelGroup } from '../ui/resizable';
+import BookShelf from "../BookShelf/book-shelf";
 // import { Route } from 'lucide-react';
 
 export default function DashboardContainer() {
@@ -24,6 +25,12 @@ export default function DashboardContainer() {
               path='/'
               element={
                 <Mail accounts={accounts} mails={mails} navCollapsedSize={4} />
+              }
+            />
+            <Route
+              path='/shelf'
+              element={
+                <BookShelf/>
               }
             />
           </Routes>
