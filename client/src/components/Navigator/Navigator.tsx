@@ -3,18 +3,12 @@ import { cn } from '@/lib/utils';
 import { AccountSwitcher } from '../home/components/account-switcher';
 import { Nav } from '../home/components/nav';
 import {
-  AlertCircle,
-  Archive,
-  ArchiveX,
-  File,
+
   Inbox,
-  MessagesSquare,
-  Send,
-  ShoppingCart,
-  Trash2,
+
   Users2,
-  Container,
-  Landmark
+  Landmark,
+  BookOpenText
 } from 'lucide-react';
 import { useAppContext } from '@/Providers/AppProvider';
 import { Separator } from '../ui/separator';
@@ -88,6 +82,13 @@ const Navigator = () => {
             icon: Landmark,
             variant: 'ghost',
             link: "/shelf"
+          },
+          {
+            title: 'Reader',
+            label: '',
+            icon: BookOpenText,
+            variant: 'ghost',
+            link: "/reader"
           },
         ]}
       />

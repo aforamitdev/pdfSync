@@ -1,13 +1,9 @@
 
-import { BellRing, Check } from "lucide-react"
-import { Button } from "../ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { CardDescription, CardTitle } from "../ui/card"
 import { Input } from "../ui/input"
-import { Label } from "../ui/label"
 import { ResizableHandle, ResizablePanel } from "../ui/resizable"
 import { Separator } from "../ui/separator"
 import { FileList } from "./FileLists"
-import { Switch } from "../ui/switch"
 import FileProgress from "./FileProgress"
 type Props = {}
 

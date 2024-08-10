@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navigator from '../Navigator/Navigator';
 import { ResizablePanelGroup } from '../ui/resizable';
 import BookShelf from '../book-shelf/book-shelf';
+import Reader from '../reader/Reader';
 // import { Route } from 'lucide-react';
 
 export default function DashboardContainer() {
@@ -33,6 +34,7 @@ export default function DashboardContainer() {
                 <BookShelf />
               }
             />
+            <Route path="/reader" element={<Reader />}></Route>
           </Routes>
         </ResizablePanelGroup>
       </div>
