@@ -1,7 +1,3 @@
-import addDays from "date-fns/addDays"
-import addHours from "date-fns/addHours"
-import format, { formatDate } from "date-fns/format"
-import nextSaturday from "date-fns/nextSaturday"
 import {
   Archive,
   ArchiveX,
@@ -12,11 +8,6 @@ import {
   ReplyAll,
   Trash2,
 } from "lucide-react"
-
-
-
-
-
 import { Mail } from "../data"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
@@ -34,7 +25,6 @@ interface MailDisplayProps {
 }
 
 export function MailDisplay({ mail }: MailDisplayProps) {
-  const today = new Date()
 
   return (
     <div className="flex h-full flex-col">
