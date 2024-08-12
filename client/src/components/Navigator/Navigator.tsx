@@ -60,7 +60,6 @@ const Navigator = () => {
           isCollapsed ? 'h-[56px]' : 'px-2'
         )}
       >
-        {JSON.stringify(isCollapsed)}
         <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
       </div>
       <Separator />
