@@ -15,7 +15,7 @@ function FileProgress({ }: Props) {
         return () => clearTimeout(timer)
     }, [])
 
-    return <div className="flex  flex-col justify-items items-center gap-4 text-sm  ">
+    return <div className="flex  flex-col justify-items items-center gap-1 text-sm  ">
 
         <FilesItem />
         <FilesItem />

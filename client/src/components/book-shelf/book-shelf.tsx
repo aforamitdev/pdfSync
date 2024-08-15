@@ -1,4 +1,6 @@
 
+import FileUpload from "../shared/FileUpload"
+import PageHeader from "../shared/PageHeader"
 import { CardDescription, CardTitle } from "../ui/card"
 import { Input } from "../ui/input"
 import { ResizableHandle, ResizablePanel } from "../ui/resizable"
@@ -12,35 +14,18 @@ const BookShelf = (props: Props) => {
     <>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={32} minSize={30}>
-        <div className="h-screen px-4 py-4 " >
-
-          <div className="flex items-center justify-between space-y-2 pb-2">
-            <div>
-              <CardTitle>Files and Assets!</CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Ebooks and Pdfs Uploaded to this system.
-              </CardDescription>
-            </div>
-            <div className="flex items-center space-x-2">
-              {/* <UserNav /> n        */}
-            </div>
-          </div>
-          <Separator />
+        <div className="h-screen " >
+          <PageHeader title="Library" subTitle="sasas" />
           {/* file upload box */}
-          <div className="grid w-full  items-center gap-1.5 h-20  my-2">
-            <Input id="asset" type="file" className="h-20 flex  item-center" />
+          <div className="bg-gray-100 h-full py-2 px-10">
+
+            <div className="bg-white">
+              <FileUpload setFile={() => { }} />
+            </div>
+            <FileProgress />
+
+            <FileList />
           </div>
-
-          {/* progress bar */}
-
-          <FileProgress />
-
-
-
-
-
-
-          <FileList />
         </div >
       </ResizablePanel>
 
