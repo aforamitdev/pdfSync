@@ -12,7 +12,7 @@ const FilesManuHeader = (props: Props) => {
 
             <div className='flex w-1/2 gap-x-2'>
                 <div className='pb-3 w-full'>
-                    <Flex direction="column" maxWidth="110px">
+                    <Flex direction="column" >
                         <Select.Root value={value} onValueChange={setValue}>
                             <Select.Trigger>
                                 <Flex as="span" align="center" gap="2">
@@ -27,7 +27,7 @@ const FilesManuHeader = (props: Props) => {
                     </Flex>
                 </div>
                 <div className='pb-3 w-full'>
-                    <Flex direction="column" maxWidth="110px">
+                    <Flex direction="column" >
                         <Select.Root value={value} onValueChange={setValue}>
                             <Select.Trigger>
                                 <Flex as="span" align="center" gap="2">
@@ -44,7 +44,7 @@ const FilesManuHeader = (props: Props) => {
                 </div>
 
                 <div className='pb-3 w-full'>
-                    <Flex direction="column" maxWidth="110px">
+                    <Flex direction="column" >
                         <Select.Root value={value} onValueChange={setValue}>
                             <Select.Trigger>
                                 <Flex as="span" align="center" gap="2">
