@@ -1,8 +1,5 @@
 import React from 'react'
-import { Progress } from '../ui/progress'
-import { File, Terminal, Loader2Icon } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import FilesItem from './Files/FilesItem'
+import FileUploadProgress from './Files/FilesUploadProgress'
 
 type Props = {}
 
@@ -16,11 +13,8 @@ function FileProgress({ }: Props) {
     }, [])
 
     return <div className="flex  flex-col justify-items items-center gap-1 text-sm  ">
-
-        <FilesItem />
-        <FilesItem />
-
-
+        <FileUploadProgress />
+        <FileUploadProgress />
     </div>
 
 }

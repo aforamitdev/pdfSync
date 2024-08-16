@@ -2,7 +2,7 @@
 function App() {
   return (
     <>
-      this is app test 
+      this is app test
     </>
   );
 }

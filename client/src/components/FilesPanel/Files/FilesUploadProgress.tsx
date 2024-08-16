@@ -3,10 +3,10 @@ import { Loader2Icon } from 'lucide-react'
 
 type Props = {}
 
-const FilesItem = (props: Props) => {
+const FilesUploadProgress = (props: Props) => {
     return (
         <>
-            <Box className='w-full'>
+            <Box className='w-full' >
                 <Card>
                     <Flex gap="3" align="center">
                         <Avatar
@@ -32,4 +32,4 @@ const FilesItem = (props: Props) => {
     )
 }
 
-export default FilesItem
+export default FilesUploadProgress
