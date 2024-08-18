@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS groups(
+    id INT PRIMARY KEY,
+    group_name TEXT NOT NULL
+);

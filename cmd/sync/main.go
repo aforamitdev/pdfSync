@@ -4,12 +4,13 @@ import (
 	"context"
 	"embed"
 	"fmt"
-	"io/fs"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	logger "github.com/aforamitdev/pdfsync/zero"
 )
 
 // go:embed build
@@ -45,16 +46,9 @@ func main() {
 
 func run(ctx context.Context, log *logger.Logger) error {
 
-	var frontend fs.FS = os.DirFS("../pdfsync/server/dist")
-
-	httpFS := http.FS(frontend)
-	fileServer := http.FileServer(httpFS)
-
-	serveIndex := ServeFileContents("index.html", httpFS)
-
 	mux := http.NewServeMux()
 
-	mux.Handle("/", Intercept404(fileServer, serveIndex))
+	// mux.Handle("/", Intercept404(fileServer, serveIndex))
 
 	serverErrors := make(chan error, 1)
 	shutdown := make(chan os.Signal, 1)

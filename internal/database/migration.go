@@ -45,7 +45,7 @@ func migrate_DB(config map[string]string) {
 	var completed []string
 
 	files, err := filepath.Glob("./migrations/*.sql")
-
+	fmt.Println(files)
 	if err != nil {
 		log.Printf("error running restore %s", err)
 		return
@@ -53,7 +53,6 @@ func migrate_DB(config map[string]string) {
 	sort.Strings(files)
 
 	db, err := OpenSqlDb()
-
 	if err != nil {
 		fmt.Println("")
 	}
@@ -70,20 +69,22 @@ func migrate_DB(config map[string]string) {
 		file_name := filepath.Base(file)
 		if !contains(file_name, migrations) {
 			log.Printf("running migrations %s", file_name)
-			result, err := runCommand("app.db", file_name)
+			result, err := runCommand("./app.db", file_name)
+			fmt.Println(result, "RES")
 			if err != nil || strings.Contains(string(result), "ERROR") {
 				if err == nil {
 					err = fmt.Errorf("\n%s", string(result))
 				}
-				completed = append(completed, file_name)
 				// If at any point we fail, log it and break
 				log.Printf("ERROR loading sql migration:%s\n", err)
 				log.Printf("All further migrations cancelled\n\n")
 				break
 			}
+			completed = append(completed, file_name)
 
 		}
 	}
+	fmt.Println(completed)
 	if len(completed) > 0 {
 		writeMetadata(config, completed, db)
 
@@ -95,7 +96,7 @@ func readMetadata(db *sql.DB) []string {
 
 	var migrations []string
 
-	sql := "select migration_version from sync_metadata order by id desc;"
+	sql := "select file_name from sync_metadata order by id desc;"
 
 	rows, err := db.Query(sql)
 	if err != nil {
@@ -116,9 +117,8 @@ func readMetadata(db *sql.DB) []string {
 }
 
 func writeMetadata(config map[string]string, migrations []string, db *sql.DB) {
-
 	for _, m := range migrations {
-		sql := "insert into sync_metadata(updated_at,sync_version,migration_version,status) VALUES(NOW(),$1,$2,100);"
+		sql := "insert into sync_metadata(updated_at,sync_version,file_name,status) VALUES(datetime('now'),$1,$2,100);"
 		result, err := db.Exec(sql, 1.0, m)
 		if err != nil {
 			log.Printf("database error %s %s", err, result)
@@ -138,10 +138,11 @@ func contains(s string, a []string) bool {
 
 func runCommand(db string, file_name string) ([]byte, error) {
 
-	fmt.Println(db, file_name, fmt.Sprintf("./migrations/%s", file_name))
-	cmd := exec.Command("sqlite3", db, "<", fmt.Sprintf("./migrations/%s", file_name))
+	fmt.Println(db, file_name, fmt.Sprintf("./migrations/%s", file_name), "dbcaoomans")
+
+	cmd := exec.Command("bash", "-c", "sqlite3", "./app.db", ".read", fmt.Sprintf("./migrations/%s", file_name))
+
 	output, err := cmd.CombinedOutput()
-	fmt.Println(string(output))
 	if err != nil {
 		return output, err
 	}
