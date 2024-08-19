@@ -24,7 +24,7 @@ func (err *Error) Error() string {
 }
 
 func NewRequestError(err error, status int) error {
-	return &Error{err, status, nil}
+	return &Error{err, status, []FieldError{}}
 }
 
 type shutdown struct {

@@ -2,6 +2,7 @@ package web
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"syscall"
@@ -33,10 +34,12 @@ func NewApp(shutdown chan os.Signal, mw ...Middleware) *App {
 
 func (a *App) Handle(method string, path string, handler Handler, mw ...Middleware) {
 
+	handleFunc := wrapMiddleware(mw, handler)
+
 	h := func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.Background()
-		if err := handler(ctx, w, r); err != nil {
-			a.handleShutdown()
+		if err := handleFunc(ctx, w, r); err != nil {
+			fmt.Println("error", err)
 		}
 	}
 

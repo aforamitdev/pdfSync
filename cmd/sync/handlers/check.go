@@ -3,7 +3,6 @@ package handlers
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"net/http"
 
 	"github.com/aforamitdev/pdfsync/zero/web"
@@ -16,22 +15,25 @@ type check struct {
 
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 
-	var sqliteVersion int
+	var sqliteVersion string
 
-	row, err := c.db.Query("SELECT sqlite_version();")
+	err := c.db.QueryRow("SELECT sqlite_version();").Scan(&sqliteVersion)
+
 	if err != nil {
+		if err == sql.ErrNoRows {
+			web.NewRequestError(err, http.StatusNoContent)
+			return err
+		}
+
 		web.ResponseError(ctx, w, err)
+		return err
 	}
-	fmt.Println(row.Columns())
-	err = row.Scan(sqliteVersion)
-	if err != nil {
-		web.ResponseError(ctx, w, err)
-	}
+
 	health := struct {
 		Version   string `json:"version"`
 		Status    string `json:"status"`
 		Database  int    `json:"database"`
-		DbVersion int    `json:"dbVersion"`
+		DbVersion string `json:"db_version"`
 	}{
 		Version:   c.build,
 		Status:    "ok",
