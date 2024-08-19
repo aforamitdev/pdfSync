@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"embed"
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,11 +10,10 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/aforamitdev/pdfsync/cmd/sync/handlers"
 	logger "github.com/aforamitdev/pdfsync/zero"
+	_ "github.com/mattn/go-sqlite3"
 )
-
-// go:embed build
-var UI embed.FS
 
 func main() {
 	var log *logger.Logger
@@ -29,9 +28,9 @@ func main() {
 	traceIDFn := func(ctx context.Context) string {
 		return "test"
 	}
-	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SALES", traceIDFn, events)
+	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SYNC", traceIDFn, events)
 	if err := run(ctx, log); err != nil {
-		log.Error(ctx, "startup", "msg")
+		log.Error(ctx, "startup error", "msg")
 		os.Exit(1)
 	}
 
@@ -46,22 +45,28 @@ func main() {
 
 func run(ctx context.Context, log *logger.Logger) error {
 
-	mux := http.NewServeMux()
-
 	// mux.Handle("/", Intercept404(fileServer, serveIndex))
 
 	serverErrors := make(chan error, 1)
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
 
-	fmt.Println(log)
-	log.Info(ctx, "startup message ")
+	db, err := sql.Open("sqlite3", "file:app.db")
+	if err != nil {
+		log.Error(ctx, "error connecting datanase1")
+		os.Exit(1)
+	}
+
+	if err != nil {
+		log.Error(ctx, "error connecting datanase")
+		return err
+	}
 
 	server := &http.Server{
 		Addr:         "localhost:9000",
 		ReadTimeout:  time.Second * 10,
 		WriteTimeout: time.Second * 10,
-		Handler:      mux,
+		Handler:      handlers.APIMux("build", shutdown, log, db),
 	}
 
 	go func() {
