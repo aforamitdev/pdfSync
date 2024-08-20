@@ -7,7 +7,7 @@ import (
 )
 
 type Storer interface {
-	Create(ctx context.Context, usr User)
+	Create(ctx context.Context, usr User) error
 }
 
 type Core struct {
