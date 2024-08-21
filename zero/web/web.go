@@ -8,6 +8,7 @@ import (
 	"syscall"
 
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
 type Encoder interface {
@@ -52,4 +53,13 @@ func (a *App) handleShutdown() {
 
 func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	a.mux.ServeHTTP(w, r)
+}
+
+func (a *App) RegisterSwagger() {
+
+	a.mux.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:9000/swagger/doc.json"), //The url pointing to API definition
+
+	)).Methods(http.MethodGet)
+
 }

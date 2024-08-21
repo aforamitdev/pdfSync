@@ -10,10 +10,27 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/aforamitdev/pdfsync/cmd/sync/docs"
+	_ "github.com/aforamitdev/pdfsync/cmd/sync/docs"
+
 	"github.com/aforamitdev/pdfsync/cmd/sync/handlers"
 	logger "github.com/aforamitdev/pdfsync/zero"
 	_ "github.com/mattn/go-sqlite3"
 )
+
+//	@title			Swagger Example API
+//	@version		1.0
+//	@description	This is a sample rk-demo server.
+//	@termsOfService	http://swagger.io/terms/
+
+//	@securityDefinitions.basic	BasicAuth
+
+//	@contact.name	API Support
+//	@contact.url	http://www.swagger.io/support
+//	@contact.email	support@swagger.io
+
+//	@license.name	Apache 2.0
+//	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 
 func main() {
 	var log *logger.Logger
@@ -43,7 +60,22 @@ func main() {
 
 }
 
+//	@Summary	Greeter service
+//	@Id			1
+//	@version	1.0
+//	@produce	application/json
+//	@Param		name	query		string	true	"Input name"
+//	@Success	200		string
+//	@Router		/v1/health [get]
+
 func run(ctx context.Context, log *logger.Logger) error {
+
+	docs.SwaggerInfo.Title = "PDF sync app api "
+	docs.SwaggerInfo.Description = "PDFs sync, share, read and mark pds"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "http://localhost:9000"
+	docs.SwaggerInfo.BasePath = "/v1"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	// mux.Handle("/", Intercept404(fileServer, serveIndex))
 
