@@ -35,8 +35,7 @@ func NewApp(shutdown chan os.Signal, mw ...Middleware) *App {
 
 func (a *App) Handle(method string, path string, handler Handler, mw ...Middleware) {
 
-	handleFunc := wrapMiddleware(mw, handler)
-
+	handleFunc := wrapMiddleware(a.mw, handler)
 	h := func(w http.ResponseWriter, r *http.Request) {
 		ctx := context.Background()
 		if err := handleFunc(ctx, w, r); err != nil {

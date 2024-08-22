@@ -42,6 +42,10 @@ func (log *Logger) write(ctx context.Context, level Level, caller int, msg strin
 	log.handler.Handle(ctx, r)
 }
 
+func (log *Logger) Errorw(ctx context.Context, msg string, keysAndValues ...interface{}) {
+	slogLevel := slog.Level(LevelError)
+	log.write(ctx, Level(slogLevel), 3, msg)
+}
 func new(w io.Writer, minLevel Level, serviceName string, traceIDFn TraceIDFn, events Events) *Logger {
 	handler := slog.Handler(slog.NewJSONHandler(w, &slog.HandlerOptions{}))
 	return &Logger{

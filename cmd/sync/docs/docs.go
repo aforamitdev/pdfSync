@@ -92,6 +92,12 @@ const docTemplate = `{
                 "db_version": {
                     "type": "string"
                 },
+                "host": {
+                    "type": "string"
+                },
+                "maxProcess": {
+                    "type": "string"
+                },
                 "status": {
                     "type": "string"
                 },

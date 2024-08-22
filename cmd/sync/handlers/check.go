@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"net/http"
+	"os"
 
 	"github.com/aforamitdev/pdfsync/zero/web"
 )
@@ -14,18 +15,20 @@ type check struct {
 }
 
 type HealthResponse struct {
-	Version   string `json:"version"`
-	Status    string `json:"status"`
-	Database  int    `json:"database"`
-	DbVersion string `json:"db_version"`
+	Version    string `json:"version"`
+	Status     string `json:"status"`
+	Database   int    `json:"database"`
+	DbVersion  string `json:"db_version"`
+	Host       string `json:"host"`
+	GoMaxProcs string `json:"maxProcess"`
 } //@name HealthCheck
 
-//	@Summary	health check
-//	@Id			1
-//	@version	1.0
-//	@produce	application/json
-//	@Success	200	{object}	HealthResponse	"health check response with, db connection, sqlite version,and app version "
-//	@Router		/health [get]
+// @Summary	health check
+// @Id		1
+// @version	1.0
+// @produce	application/json
+// @Success	200	{object}	HealthResponse	"health check response with, db connection, sqlite version,and app version "
+// @Router	/health [get]
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 
 	var sqliteVersion string
@@ -42,12 +45,19 @@ func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Reque
 		return err
 	}
 
+	host_name, err := os.Hostname()
+	if err != nil {
+		host_name = "N/A"
+	}
+
 	health := HealthResponse{
 
-		Version:   c.build,
-		Status:    "ok",
-		Database:  c.db.Stats().OpenConnections,
-		DbVersion: sqliteVersion,
+		Version:    c.build,
+		Status:     "ok",
+		Database:   c.db.Stats().OpenConnections,
+		DbVersion:  sqliteVersion,
+		Host:       host_name,
+		GoMaxProcs: os.Getenv("GOMAXPROCS"),
 	}
 	return web.Response(ctx, w, health, http.StatusOK)
 

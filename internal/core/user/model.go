@@ -15,6 +15,7 @@ type User struct {
 	DateUpdated  time.Time
 }
 
+// informations needed to create a new user
 type NewUser struct {
 	Name  string
 	Email mail.Address

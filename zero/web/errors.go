@@ -12,6 +12,17 @@ type ErrorResponse struct {
 	Fields []FieldError `json:"fields,omitempty"`
 }
 
+// RequestError is used to pass an error during the request through the
+// application with web specific context.
+type RequestError struct {
+	Err    error
+	Status int
+}
+
+func (re *RequestError) Error() string {
+	return re.Err.Error()
+}
+
 type Error struct {
 	Err    error
 	Status int
@@ -40,4 +51,12 @@ func IsShutdown(err error) bool {
 		return true
 	}
 	return false
+}
+
+func GetRequestError(err error) *RequestError {
+	var re *RequestError
+	if !errors.As(err, &re) {
+		return re
+	}
+	return re
 }
