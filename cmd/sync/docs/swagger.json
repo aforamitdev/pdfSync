@@ -9,51 +9,33 @@
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Greeter service",
+                "summary": "health check",
                 "operationId": "1",
                 "responses": {
                     "200": {
-                        "description": "ok",
+                        "description": "health check response with, db connection, sqlite version,and app version ",
                         "schema": {
-                            "$ref": "#/definitions/AppUser"
+                            "$ref": "#/definitions/HealthCheck"
                         }
-                    }
-                }
-            }
-        },
-        "/healthdv": {
-            "get": {
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "test service",
-                "operationId": "2",
-                "responses": {
-                    "200": {
-                        "description": "OK"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "AppUser": {
+        "HealthCheck": {
             "type": "object",
-            "required": [
-                "email",
-                "name"
-            ],
             "properties": {
-                "dateCreated": {
+                "database": {
+                    "type": "integer"
+                },
+                "db_version": {
                     "type": "string"
                 },
-                "dateUpdated": {
+                "status": {
                     "type": "string"
                 },
-                "email": {
-                    "type": "string"
-                },
-                "name": {
+                "version": {
                     "type": "string"
                 }
             }

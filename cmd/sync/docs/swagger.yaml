@@ -1,17 +1,14 @@
 definitions:
-  AppUser:
+  HealthCheck:
     properties:
-      dateCreated:
+      database:
+        type: integer
+      db_version:
         type: string
-      dateUpdated:
+      status:
         type: string
-      email:
+      version:
         type: string
-      name:
-        type: string
-    required:
-    - email
-    - name
     type: object
 info:
   contact: {}
@@ -23,17 +20,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: ok
+          description: 'health check response with, db connection, sqlite version,and
+            app version '
           schema:
-            $ref: '#/definitions/AppUser'
-      summary: Greeter service
-  /healthdv:
-    get:
-      operationId: "2"
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-      summary: test service
+            $ref: '#/definitions/HealthCheck'
+      summary: health check
 swagger: "2.0"

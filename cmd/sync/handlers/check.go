@@ -3,10 +3,8 @@ package handlers
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"net/http"
 
-	"github.com/aforamitdev/pdfsync/cmd/sync/handlers/usergrp"
 	"github.com/aforamitdev/pdfsync/zero/web"
 )
 
@@ -15,53 +13,22 @@ type check struct {
 	db    *sql.DB
 }
 
-// @Summary		Greeter service
+type HealthResponse struct {
+	Version   string `json:"version"`
+	Status    string `json:"status"`
+	Database  int    `json:"database"`
+	DbVersion string `json:"db_version"`
+} //@name HealthCheck
+
+// @Summary		health check
 // @Id			1
 // @version		1.0
 // @produce		application/json
-// @Success		200 {object} usergrp.AppUser	"ok"
+// @Success		200 {object} HealthResponse	"health check response with, db connection, sqlite version,and app version "
 // @Router		/health [get]
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 
 	var sqliteVersion string
-	var user usergrp.AppUser
-	fmt.Println(user)
-	err := c.db.QueryRow("SELECT sqlite_version();").Scan(&sqliteVersion)
-
-	if err != nil {
-		if err == sql.ErrNoRows {
-			web.NewRequestError(err, http.StatusNoContent)
-			return err
-		}
-
-		web.ResponseError(ctx, w, err)
-		return err
-	}
-
-	health := struct {
-		Version   string `json:"version"`
-		Status    string `json:"status"`
-		Database  int    `json:"database"`
-		DbVersion string `json:"db_version"`
-	}{
-		Version:   c.build,
-		Status:    "ok",
-		Database:  c.db.Stats().OpenConnections,
-		DbVersion: sqliteVersion,
-	}
-	return web.Response(ctx, w, health, http.StatusOK)
-
-}
-
-// @Summary		test service
-// @Id			2
-// @version		1.0
-// @produce		application/json
-// @Success		200
-// @Router		/healthdv [get]
-func (c *check) healdbth(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-
-	var sqliteVersion string
 
 	err := c.db.QueryRow("SELECT sqlite_version();").Scan(&sqliteVersion)
 
@@ -75,12 +42,8 @@ func (c *check) healdbth(ctx context.Context, w http.ResponseWriter, r *http.Req
 		return err
 	}
 
-	health := struct {
-		Version   string `json:"version"`
-		Status    string `json:"status"`
-		Database  int    `json:"database"`
-		DbVersion string `json:"db_version"`
-	}{
+	health := HealthResponse{
+
 		Version:   c.build,
 		Status:    "ok",
 		Database:  c.db.Stats().OpenConnections,
