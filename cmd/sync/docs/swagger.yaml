@@ -4,12 +4,6 @@ paths:
   /health:
     get:
       operationId: "1"
-      parameters:
-      - description: Input name
-        in: query
-        name: name
-        required: true
-        type: string
       produces:
       - application/json
       responses:
@@ -19,12 +13,6 @@ paths:
   /healthdv:
     get:
       operationId: "2"
-      parameters:
-      - description: Input name
-        in: query
-        name: name
-        required: true
-        type: string
       produces:
       - application/json
       responses:

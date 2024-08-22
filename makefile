@@ -8,3 +8,6 @@ tmplformate:
 
 run:
 	go run ./cmd/sync/*.go
+
+doc:
+	swag init -d ./cmd/sync/ -g ./main.go -o ./cmd/sync/docs

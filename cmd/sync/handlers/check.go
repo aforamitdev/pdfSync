@@ -17,7 +17,6 @@ type check struct {
 // @Id			1
 // @version		1.0
 // @produce		application/json
-// @Param		name	query		string	true	"Input name"
 // @Success		200
 // @Router		/health [get]
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
@@ -55,7 +54,6 @@ func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Reque
 // @Id			2
 // @version		1.0
 // @produce		application/json
-// @Param		name	query		string	true	"Input name"
 // @Success		200
 // @Router		/healthdv [get]
 func (c *check) healdbth(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
