@@ -1,0 +1,19 @@
+info:
+  contact: {}
+paths:
+  /health:
+    get:
+      operationId: "1"
+      parameters:
+      - description: Input name
+        in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Greeter service
+swagger: "2.0"

@@ -13,6 +13,13 @@ type check struct {
 	db    *sql.DB
 }
 
+// @Summary		Greeter service
+// @Id			1
+// @version		1.0
+// @produce		application/json
+// @Param		name	query		string	true	"Input name"
+// @Success		200
+// @Router		/health [get]
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 
 	var sqliteVersion string
