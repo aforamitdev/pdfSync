@@ -1,3 +1,18 @@
+definitions:
+  AppUser:
+    properties:
+      dateCreated:
+        type: string
+      dateUpdated:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+    required:
+    - email
+    - name
+    type: object
 info:
   contact: {}
 paths:
@@ -8,7 +23,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: ok
+          schema:
+            $ref: '#/definitions/AppUser'
       summary: Greeter service
   /healthdv:
     get:

@@ -13,7 +13,10 @@
                 "operationId": "1",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/AppUser"
+                        }
                     }
                 }
             }
@@ -29,6 +32,29 @@
                     "200": {
                         "description": "OK"
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AppUser": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "dateCreated": {
+                    "type": "string"
+                },
+                "dateUpdated": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         }

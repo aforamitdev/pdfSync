@@ -24,7 +24,10 @@ const docTemplate = `{
                 "operationId": "1",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "ok",
+                        "schema": {
+                            "$ref": "#/definitions/AppUser"
+                        }
                     }
                 }
             }
@@ -40,6 +43,29 @@ const docTemplate = `{
                     "200": {
                         "description": "OK"
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AppUser": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "dateCreated": {
+                    "type": "string"
+                },
+                "dateUpdated": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
                 }
             }
         }

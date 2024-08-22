@@ -3,8 +3,10 @@ package handlers
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"net/http"
 
+	"github.com/aforamitdev/pdfsync/cmd/sync/handlers/usergrp"
 	"github.com/aforamitdev/pdfsync/zero/web"
 )
 
@@ -17,12 +19,13 @@ type check struct {
 // @Id			1
 // @version		1.0
 // @produce		application/json
-// @Success		200
+// @Success		200 {object} usergrp.AppUser	"ok"
 // @Router		/health [get]
 func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 
 	var sqliteVersion string
-
+	var user usergrp.AppUser
+	fmt.Println(user)
 	err := c.db.QueryRow("SELECT sqlite_version();").Scan(&sqliteVersion)
 
 	if err != nil {
