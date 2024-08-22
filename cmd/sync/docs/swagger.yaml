@@ -1,4 +1,18 @@
 definitions:
+  AppUser:
+    properties:
+      dateCreated:
+        type: string
+      dateUpdated:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+    required:
+    - email
+    - name
+    type: object
   HealthCheck:
     properties:
       database:
@@ -25,4 +39,22 @@ paths:
           schema:
             $ref: '#/definitions/HealthCheck'
       summary: health check
+  /users:
+    post:
+      operationId: create-user
+      parameters:
+      - description: payload to ceate new app user
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AppUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ' To create new user'
+          schema:
+            $ref: '#/definitions/AppUser'
+      summary: create a new system user
 swagger: "2.0"

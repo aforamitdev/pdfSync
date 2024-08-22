@@ -11,3 +11,6 @@ run:
 
 doc:
 	swag init -d ./cmd/sync/ -g ./main.go -o ./cmd/sync/docs
+
+docpritty:
+	swag fmt

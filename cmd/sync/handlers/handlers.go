@@ -33,16 +33,10 @@ func APIMux(build string, shutdown chan os.Signal, log *logger.Logger, db *sql.D
 
 	check := check{build: build, db: db}
 
-	// GetOrders godoc
-	//	@Summary		Get details of all orders
-	//	@Description	Get details of all orders
-	//	@Tags			orders
-	//	@Accept			json
-	//	@Produce		json
-	//	@Success		200	{array}	Order
-	//	@Router			/orders [get]
 	app.Handle(http.MethodGet, "/v1/health", check.health)
 
+	// user handlers
 	app.Handle(http.MethodPost, "/v1/users", ugh.Create)
+
 	return app
 }

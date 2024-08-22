@@ -31,9 +31,58 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/users": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "create a new system user",
+                "operationId": "create-user",
+                "parameters": [
+                    {
+                        "description": "payload to ceate new app user",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AppUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": " To create new user",
+                        "schema": {
+                            "$ref": "#/definitions/AppUser"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "AppUser": {
+            "type": "object",
+            "required": [
+                "email",
+                "name"
+            ],
+            "properties": {
+                "dateCreated": {
+                    "type": "string"
+                },
+                "dateUpdated": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "HealthCheck": {
             "type": "object",
             "properties": {
