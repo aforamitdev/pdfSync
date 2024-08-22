@@ -1,0 +1,28 @@
+definitions:
+  HealthCheck:
+    properties:
+      database:
+        type: integer
+      db_version:
+        type: string
+      status:
+        type: string
+      version:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /health:
+    get:
+      operationId: "1"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'health check response with, db connection, sqlite version,and
+            app version '
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      summary: health check
+swagger: "2.0"

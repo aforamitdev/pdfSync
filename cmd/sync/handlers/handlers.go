@@ -29,10 +29,19 @@ func APIMux(build string, shutdown chan os.Signal, log *logger.Logger, db *sql.D
 	ugh := usergrp.New(usrCore)
 
 	app := web.NewApp(shutdown, mid.Error(log))
-	check := check{build: build, db: db}
-	app.Handle(http.MethodGet, "/v1/health", check.health)
+	app.RegisterSwagger()
 
-	// ----- user gorups
+	check := check{build: build, db: db}
+
+	// GetOrders godoc
+	//	@Summary		Get details of all orders
+	//	@Description	Get details of all orders
+	//	@Tags			orders
+	//	@Accept			json
+	//	@Produce		json
+	//	@Success		200	{array}	Order
+	//	@Router			/orders [get]
+	app.Handle(http.MethodGet, "/v1/health", check.health)
 
 	app.Handle(http.MethodPost, "/v1/users", ugh.Create)
 	return app
