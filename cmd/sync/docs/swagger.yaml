@@ -16,4 +16,19 @@ paths:
         "200":
           description: OK
       summary: Greeter service
+  /healthdv:
+    get:
+      operationId: "2"
+      parameters:
+      - description: Input name
+        in: query
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: test service
 swagger: "2.0"

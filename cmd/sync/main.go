@@ -10,8 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/aforamitdev/pdfsync/docs"
-
+	"github.com/aforamitdev/pdfsync/cmd/sync/docs"
 	"github.com/aforamitdev/pdfsync/cmd/sync/handlers"
 	logger "github.com/aforamitdev/pdfsync/zero"
 	_ "github.com/mattn/go-sqlite3"
@@ -50,7 +49,7 @@ func run(ctx context.Context, log *logger.Logger) error {
 	docs.SwaggerInfo.Title = "PDF sync app api "
 	docs.SwaggerInfo.Description = "PDFs sync, share, read and mark pds"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "http://localhost:9000"
+	docs.SwaggerInfo.Host = "localhost:9000"
 	docs.SwaggerInfo.BasePath = "/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 

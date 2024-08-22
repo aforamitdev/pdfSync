@@ -37,6 +37,29 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/healthdv": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "test service",
+                "operationId": "2",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Input name",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     }
 }`
