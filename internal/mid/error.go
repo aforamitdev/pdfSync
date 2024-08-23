@@ -2,7 +2,6 @@ package mid
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/aforamitdev/pdfsync/internal/sys/validate"
@@ -38,7 +37,6 @@ func Error(log *logger.Logger) web.Middleware {
 					status = reqErr.Status
 
 				default:
-					fmt.Println("DEFAULT")
 					er = web.ErrorResponse{
 						Error: http.StatusText(http.StatusInternalServerError),
 					}

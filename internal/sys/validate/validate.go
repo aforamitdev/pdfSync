@@ -1,7 +1,8 @@
 package validate
 
 import (
-	"fmt"
+	"reflect"
+	"strings"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -11,9 +12,19 @@ var validate *validator.Validate
 
 // translator is a cache of locale and translation information.
 
+func init() {
+	validate = validator.New()
+	validate.RegisterTagNameFunc(func(field reflect.StructField) string {
+		name := strings.SplitN(field.Tag.Get("json"), ",", 2)[0]
+		if name == "-" {
+			return ""
+		}
+		return name
+	})
+}
+
 func Check(val any) error {
 
-	fmt.Println(val, "VALUE")
 	if err := validate.Struct(val); err != nil {
 		varrors, ok := err.(validator.ValidationErrors)
 

@@ -30,6 +30,7 @@ func toCoreNewUser(app AppNewUser) (user.NewUser, error) {
 }
 
 func (app AppNewUser) Validate() error {
+
 	if err := validate.Check(app); err != nil {
 		return err
 	}

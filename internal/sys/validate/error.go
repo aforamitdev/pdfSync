@@ -3,7 +3,6 @@ package validate
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 )
 
 type FieldError struct {
@@ -41,7 +40,6 @@ func (fe FieldErrors) Fields() map[string]string {
 
 func IsFieldErrors(err error) bool {
 	var fe FieldErrors
-	fmt.Println(errors.As(err, &fe))
 	return errors.As(err, &fe)
 }
 
