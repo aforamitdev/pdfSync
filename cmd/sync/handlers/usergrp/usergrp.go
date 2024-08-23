@@ -27,7 +27,7 @@ func New(user *user.Core) *Handlers {
 func (h *Handlers) Create(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	var app AppNewUser
 	if err := web.Decode(r, &app); err != nil {
-		return web.NewRequestError(err, http.StatusBadRequest)
+		return err
 
 	}
 
