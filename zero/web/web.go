@@ -52,9 +52,9 @@ func (a *App) handleShutdown() {
 
 func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	a.mux.ServeHTTP(w, r)
-	a.mux.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler).Methods(http.MethodGet)
 }
 
 func (a *App) RegisterSwagger() {
 
+	a.mux.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler).Methods(http.MethodGet)
 }

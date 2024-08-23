@@ -32,10 +32,11 @@ func (h *Handlers) Create(ctx context.Context, w http.ResponseWriter, r *http.Re
 	}
 
 	nc, err := toCoreNewUser(app)
-	fmt.Println(nc)
+
 	if err != nil {
-		return web.NewRequestError(err, http.StatusBadRequest)
+		return err
 	}
 
+	fmt.Println(nc)
 	return web.Response(ctx, w, app, http.StatusCreated)
 }

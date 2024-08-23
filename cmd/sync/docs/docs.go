@@ -46,7 +46,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AppUser"
+                            "$ref": "#/definitions/AppNewUser"
                         }
                     }
                 ],
@@ -54,7 +54,7 @@ const docTemplate = `{
                     "200": {
                         "description": " To create new user",
                         "schema": {
-                            "$ref": "#/definitions/AppUser"
+                            "$ref": "#/definitions/AppNewUser"
                         }
                     }
                 }
@@ -62,7 +62,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "AppUser": {
+        "AppNewUser": {
             "type": "object",
             "required": [
                 "email",

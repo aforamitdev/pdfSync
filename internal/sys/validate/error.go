@@ -3,35 +3,25 @@ package validate
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
-
-var ErrInvalidID = errors.New("ID is not in its proper form")
-
-type ErrorResponse struct {
-	Error string `json:"error"`
-	Field string `json:"fields,omitempty"`
-}
-
-type RequestError struct {
-	Err    error
-	status int
-	fields error
-}
-
-func NewRequestError(err error, status int) error {
-	return &RequestError{Err: err, status: status}
-}
-
-func (err *RequestError) Error() string {
-	return err.Err.Error()
-}
 
 type FieldError struct {
 	Field string `json:"field"`
-	Error string `json:"error"`
+	Err   string `json:"error"`
 }
 
 type FieldErrors []FieldError
+
+// NewFieldsError creates an fields error.
+func NewFieldsError(field string, err error) error {
+	return FieldErrors{
+		{
+			Field: field,
+			Err:   err.Error(),
+		},
+	}
+}
 
 func (fe FieldErrors) Error() string {
 	d, err := json.Marshal(fe)
@@ -41,12 +31,24 @@ func (fe FieldErrors) Error() string {
 	return string(d)
 }
 
-func Cause(err error) error {
-	root := err
-	for {
-		if err = errors.Unwrap(root); err == nil {
-			return root
-		}
-		root = err
+func (fe FieldErrors) Fields() map[string]string {
+	m := make(map[string]string)
+	for _, fld := range fe {
+		m[fld.Field] = fld.Err
 	}
+	return m
+}
+
+func IsFieldErrors(err error) bool {
+	var fe FieldErrors
+	fmt.Println(errors.As(err, &fe))
+	return errors.As(err, &fe)
+}
+
+func GetFieldErrors(err error) FieldErrors {
+	var fe FieldErrors
+	if !errors.As(err, &fe) {
+		return nil
+	}
+	return fe
 }

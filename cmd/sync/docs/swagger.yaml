@@ -1,5 +1,5 @@
 definitions:
-  AppUser:
+  AppNewUser:
     properties:
       dateCreated:
         type: string
@@ -52,13 +52,13 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/AppUser'
+          $ref: '#/definitions/AppNewUser'
       produces:
       - application/json
       responses:
         "200":
           description: ' To create new user'
           schema:
-            $ref: '#/definitions/AppUser'
+            $ref: '#/definitions/AppNewUser'
       summary: create a new system user
 swagger: "2.0"

@@ -49,7 +49,7 @@ func run(ctx context.Context, log *logger.Logger) error {
 	docs.SwaggerInfo.Title = "PDF sync app api "
 	docs.SwaggerInfo.Description = "PDFs sync, share, read and mark pds"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:9000"
+	docs.SwaggerInfo.Host = "127.0.0.1:9000"
 	docs.SwaggerInfo.BasePath = "/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 

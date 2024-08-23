@@ -41,7 +41,6 @@ func (c *check) health(ctx context.Context, w http.ResponseWriter, r *http.Reque
 			return err
 		}
 
-		web.ResponseError(ctx, w, err)
 		return err
 	}
 

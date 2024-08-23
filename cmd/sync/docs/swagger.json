@@ -35,7 +35,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AppUser"
+                            "$ref": "#/definitions/AppNewUser"
                         }
                     }
                 ],
@@ -43,7 +43,7 @@
                     "200": {
                         "description": " To create new user",
                         "schema": {
-                            "$ref": "#/definitions/AppUser"
+                            "$ref": "#/definitions/AppNewUser"
                         }
                     }
                 }
@@ -51,7 +51,7 @@
         }
     },
     "definitions": {
-        "AppUser": {
+        "AppNewUser": {
             "type": "object",
             "required": [
                 "email",
