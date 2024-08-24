@@ -1,6 +1,7 @@
 package usergrp
 
 import (
+	"fmt"
 	"net/mail"
 
 	"github.com/aforamitdev/pdfsync/internal/core/user"
@@ -17,6 +18,7 @@ type AppNewUser struct {
 func toCoreNewUser(app AppNewUser) (user.NewUser, error) {
 
 	addr, err := mail.ParseAddress(app.Email)
+	fmt.Println(*addr)
 	if err != nil {
 		return user.NewUser{}, validate.NewFieldsError("email", err)
 	}

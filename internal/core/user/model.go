@@ -2,6 +2,7 @@ package user
 
 import (
 	"net/mail"
+	"os/user"
 	"time"
 )
 
@@ -19,4 +20,8 @@ type User struct {
 type NewUser struct {
 	Name  string
 	Email mail.Address
+}
+
+func toDBUser(usr user.User) {
+
 }

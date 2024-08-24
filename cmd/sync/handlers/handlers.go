@@ -24,7 +24,7 @@ func APIMux(build string, shutdown chan os.Signal, log *logger.Logger, db *sql.D
 
 	envCore := event.NewCore(log)
 
-	usrCore := user.NewCore(envCore, userdb.NewStore(log, db))
+	usrCore := user.NewCore(envCore, userdb.NewRepository(log, db))
 
 	ugh := usergrp.New(usrCore)
 

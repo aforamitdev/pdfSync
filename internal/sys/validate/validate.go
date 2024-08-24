@@ -1,6 +1,7 @@
 package validate
 
 import (
+	"fmt"
 	"reflect"
 	"strings"
 
@@ -13,6 +14,8 @@ var validate *validator.Validate
 // translator is a cache of locale and translation information.
 
 func init() {
+
+	fmt.Println("INIT")
 	validate = validator.New()
 	validate.RegisterTagNameFunc(func(field reflect.StructField) string {
 		name := strings.SplitN(field.Tag.Get("json"), ",", 2)[0]

@@ -37,6 +37,11 @@ func (h *Handlers) Create(ctx context.Context, w http.ResponseWriter, r *http.Re
 		return err
 	}
 
-	fmt.Println(nc)
+	usr, err := h.user.Create(ctx, nc)
+
+	if err != nil {
+		return fmt.Errorf("create: use[%+v]:%w", usr, err)
+	}
+
 	return web.Response(ctx, w, app, http.StatusCreated)
 }
