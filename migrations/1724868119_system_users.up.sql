@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS system_users(
+    id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    user_name STRING NOT NULL,
+    user_email STRING NOT NULl,
+    password_hash TEXT NOT NULL,
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date_updated DATETIME
+);

@@ -27,10 +27,11 @@ func (c *Core) Create(ctx context.Context, nu NewUser) (User, error) {
 	now := time.Now()
 
 	usr := User{
-		Name:        nu.Name,
-		Email:       nu.Email,
-		DateCreated: now,
-		DateUpdated: now,
+		Name:         nu.Name,
+		Email:        nu.Email,
+		PasswordHash: []byte(nu.Password),
+		DateCreated:  now,
+		DateUpdated:  now,
 	}
 
 	trans := func(s UserRepository) error {

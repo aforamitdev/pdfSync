@@ -1,3 +1,0 @@
-BEGIN TRANSACTION;
-DROP TABLE usergroupmapping;
-COMMIT;

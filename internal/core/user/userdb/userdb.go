@@ -23,10 +23,9 @@ func NewRepository(log *logger.Logger, db *sql.DB) *UserRepository {
 }
 
 func (s *UserRepository) Create(ctx context.Context, usr user.User) error {
-	// fmt.Println(usr.Email, "USER RPO")
-	q := `INSERT INTO users(user_name,email) VALUES(:user_name,:email)`
+	fmt.Println(usr)
+	q := `INSERT INTO system_users(id,user_name,user_email,password_hash,date_created,date_updated) VALUES(:id,:user_name,:user_email,:password_hash,:date_created,:date_updated)`
 	q = database.QueryString(q, toDBUser(usr))
-	fmt.Println(q, "QIERY")
 	res, err := s.db.Exec(q)
 
 	if err != nil {

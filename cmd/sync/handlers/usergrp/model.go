@@ -11,6 +11,7 @@ import (
 type AppNewUser struct {
 	Name        string `json:"name" validate:"required"`
 	Email       string `json:"email" validate:"required,email"`
+	Password    string `json:"password" validate:"required"`
 	DateCreated string `json:"dateCreated"`
 	DateUpdated string `json:"dateUpdated"`
 } //@name AppNewUser

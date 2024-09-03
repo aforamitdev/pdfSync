@@ -18,8 +18,9 @@ type User struct {
 
 // informations needed to create a new user
 type NewUser struct {
-	Name  string
-	Email mail.Address
+	Name     string
+	Email    mail.Address
+	Password string
 }
 
 func toDBUser(usr user.User) {
